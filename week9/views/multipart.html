@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>{{title}}</h2>
+
+<div>
+    <form id="form" action="/upload" method="POST" enctype="multipart/form-data">
+        <label>Image File</label>
+        <input type="file" name="image"><br>
+        <label>Image Title</label>
+        <input type="text" name="title"><br>
+        <button type="submit">업로드</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- 플레이리스트를 관리하는 화면을 구성한 코드 -->
+<!-- 넌적스의 include를 사용해, 공통되는 메뉴바 부분을 재사용 -->
+<!--  스태틱 미들웨어를 통해 정적인 css, js파일을 로드 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SONG BOX 플레이리스트 관리</title>
+        <link rel='stylesheet' href="./playlist.css" />
+    </head>
+    <body>
+
+        {% include "com_menubar.html" %}
+
+        <main>
+        <div>
+            <form id='addSong'>
+            <h2>노래를 추가하세요!</h2>
+            <input type="artist" name="artist" placeholder="Artist"><br>
+            <input type="title" name="title" placeholder="Title"><br>
+            <button id="submit_song" type="submit">추가하기</button>
+            </form>
+        </div>
+        </main>
+        <div id="list"></div>
+        <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+        <script src='admin.js'></script>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<!-- 사용자 정보를 담고 있는 table이 있는 HTML -->
+<table id="user-list">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>e-mail</th>
+        <th>user name</th>
+        <th>e-mail 수신 여부</th>
+        <th>삭제하기</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.name}}</td>
+        <td>{{ '동의' if user.notice else '동의X'}}</td>
+        <td><button id='user_remove'>삭제</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

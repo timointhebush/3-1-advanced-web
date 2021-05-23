@@ -1,0 +1,30 @@
+<!-- 회원가입 화면을 구성하는 HTML코드. -->
+<!-- 넌적스의 include를 사용해, 공통되는 제목 부분을 재사용 -->
+<!-- 넌적스의 변수를 활용해 비밀번호가 일치하지 않았던 경우 경고 메세지를 추가 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SONG BOX 회원가입</title>
+        <link rel='stylesheet' href="./front.css" />
+    </head>
+    <body>
+        
+        {% include "com_home_text.html" %}
+
+        <main id='signup_form'>
+        <h2>회원 가입</h2>
+        {% if password === 'wrong' %}
+        <span id='wrong_password'>비밀번호가 일치하지 않습니다.</span>
+        {% endif %}
+        <form name='signup' method="POST" action="/signup">
+            <input type="email" name="email" placeholder="E-MAIL"> <br>
+            <input type="text" name="username" placeholder="USER NAME"> <br>
+            <input type="password" name="password" placeholder="PASSWORD"> <br>
+            <input type="password" name="repeat_password" placeholder="REPEAT PASSWORD"> <br>
+            <input type="submit" value="Sign Up">
+        </form>
+        </main>
+        
+    </body>
+</html>

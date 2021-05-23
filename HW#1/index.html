@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/ambition">앰비션뮤직</a>
+            <a href="/aomg">AOMG</a>
+            <a href="/vmc">VMC</a>
+        </nav>
+        <p>
+            <h1>한국의 힙합 레이블들</h1>
+            <h3>힙합 레이블을 입력하면 대표 이름을 알 수 있습니다.</h3>
+            <p>(예: 앰비션뮤직, AOMG, VMC)</p>
+            <div>
+                <form id='form'>
+                    <input type="text" id='label'>
+                    <button type="submit">입력 완료</button>
+                </form>
+            </div>
+            <p>레이블 CEO: <span id="answer"></span></p>
+
+            <h3>아티스트를 선택하면 소속 레이블을 알 수 있습니다.</h3>
+            <div>
+                <form id='form2'>
+                    <input type='radio' name='artist' value='창모'>
+                        창모<img src="img/changmo.jpeg" width="100"><br>
+                    <input type='radio' name='artist' value='로꼬'>
+                        로꼬<img src="img/locco.jpeg" width="100"><br>
+                    <input type='radio' name='artist' value='넉살'>
+                        넉살<img src="img/nucksal.jpeg" width="100"><br>
+                    <button type='submit'>선택 완료</button>
+                </form>
+            </div>
+            <p>소속 레이블: <span id="answer2"></span></p>
+
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="./front.js"></script>
+        </p>
+    </body>
+</html>

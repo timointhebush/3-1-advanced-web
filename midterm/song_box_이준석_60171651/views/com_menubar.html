@@ -1,0 +1,10 @@
+<nav id='menubar'>
+    <span id='menubar_title'>{{username}}님 SONG BOX에 오신 것을 환영합니다!</span>
+
+    {% if status === 'admin' %}
+    <a class='setting' href="/playlist">플레이리스트로 이동하기</a>
+    {% elif status === 'playlist' %}
+    <a class='setting' href="/admin">플레이리스트 관리하기</a>
+    {% endif %}
+    <a class = 'setting' id='logout' href="/logout">로그아웃</a>
+</nav>
