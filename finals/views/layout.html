@@ -9,36 +9,29 @@
   </head>
   <body>
     <div class="container">
+      <h1 class="logo"><img id='logo' src="./img/song_box_logo.png" width="50px">SONG BOX</h1>
       <div class="profile-wrap">
         <div class="profile">
           {% if user and user.id %}
             <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
           <input id="my-id" type="hidden" value="{{user.id}}">
-          <a id="my-profile" href="/profile" class="btn">내 프로필</a>
+            {% if title == "SONGBOX" %}
+              <a id="manage" href="/manage" class="btn">플레이리스트 관리하기</a>
+            {% else %}
+              <a id="main" href="/" class="btn">플레이리스트</a>
+            {% endif %}
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
         {% else %}
-          <form id="login-form" action="/auth/login" method="post">
-            <div class="input-group">
-              <label for="email">이메일</label>
-              <input id="email" type="email" name="email" required autofocus>
-            </div>
-            <div class="input-group">
-              <label for="password">비밀번호</label>
-              <input id="password" type="password" name="password" required>
-            </div>
-            <a id="join" href="/join" class="btn">회원가입</a>
-            <button id="login" type="submit" class="btn">로그인</button>
-            <a id="kakao" href="/auth/kakao" class="btn">카카오톡</a>
-          </form>
+          <a id="login" href="/login" class="btn">로그인</a>
         {% endif %}
         </div>
-        <footer>
-          Copyright 2021.&nbsp;
-          <a href="https://www.instagram.com/timointhebush" target="_blank">timointhebush.</a> all rights reserved
-        </footer>
       </div>
       {% block content %}
       {% endblock %}
+      <footer>
+        Copyright 2021.&nbsp;
+        <a href="https://www.instagram.com/timointhebush" target="_blank">timointhebush.</a> all rights reserved
+      </footer>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>

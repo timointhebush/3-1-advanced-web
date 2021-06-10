@@ -9,12 +9,31 @@ router.use((req, res, next) => {
     next();
 })
 
-router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', {title: '내 정보 -NodeBird'});
+router.get('/manage', isLoggedIn, async (req, res, next) => {
+  try {
+      const posts = await Post.findAll({
+        include: {
+          model: User,
+          attributes: ['id', 'nick'],
+        },
+        order: [['createdAt', 'DESC']],
+      });
+      res.render('manage', {
+        title: '플레이리스트 관리하기',
+        twits: posts,
+      });
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
 });
 
 router.get('/join', isNotLoggedIn, (req, res) => {
     res.render('join', {title: '회원가입 - NodeBird'});
+});
+
+router.get('/login', isNotLoggedIn, (req, res) => {
+  res.render('login');
 });
 
 router.get('/', async (req, res, next) => {
@@ -27,7 +46,7 @@ router.get('/', async (req, res, next) => {
           order: [['createdAt', 'DESC']],
         });
         res.render('main', {
-          title: 'NodeBird',
+          title: 'SONGBOX',
           twits: posts,
         });
       } catch (err) {

@@ -1,8 +1,27 @@
 {% extends 'layout.html' %}
 
+
 {% block content %}
     <div class="timeline">
       {% if user %}
+        <div>
+          <form id="twit-form" action="/post" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+              <input type="artist" name="artist" placeholder="Artist"><br>
+              <input type="title" name="title" placeholder="Title"><br>
+            </div>
+            <div class="img-preview">
+              <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
+              <input id="img-url" type="hidden" name="url">
+            </div>
+            <div>
+              <label id="img-label" for="img">앨범 커버 업로드</label>
+              <input id="img" type="file" accept="image/*">
+              <button id="twit-btn" type="submit" class="btn">노래 등록하기</button>
+            </div>
+          </form>
+        </div>
+      {% endif %}
       <div class="twits">
         {% for twit in twits %}
           <div class="twit">
@@ -16,9 +35,6 @@
           </div>
         {% endfor %}
       </div>
-      {% else %}
-        <h2>로그인해주세요!</h2>
-      {% endif %}
     </div>
 {% endblock %}
 

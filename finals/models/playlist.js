@@ -3,8 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Post extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      content: {
-        type: Sequelize.STRING(140),
+      artist: {
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      title: {
+        type: Sequelize.STRING(30),
         allowNull: false,
       },
       img: {
@@ -25,6 +29,5 @@ module.exports = class Post extends Sequelize.Model {
 
   static associate(db) {
     db.Post.belongsTo(db.User);
-    // db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
   }
 };

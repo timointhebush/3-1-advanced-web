@@ -1,0 +1,23 @@
+<!-- 첫 로그인 화면을 구성하는 HTML코드. -->
+<!-- 넌적스의 include를 사용해, 공통되는 제목 부분을 재사용 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>SONG BOX 로그인</title>
+        <link rel='stylesheet' href="./front.css" />
+    </head>
+    <body>
+        <header id="home_text">
+            <h1>SONG BOX</h1>
+            <h2>여러분의 추천곡들을 담아 친구들에게 보내보세요!</h2>
+        </header>
+        <img id='logo' src="./img/song_box_logo.png" width="500px">
+        <form id='login-form' method="POST" action="/auth/login">
+            <input type="email" id='email' placeholder="E-MAIL"> <br>
+            <input type="password" id='password' placeholder="PASSWORD"> <br>
+            <button id="login" type="submit" class="btn">로그인</button>
+            <a id="kakao" href="/auth/kakao" class="btn">카카오톡</a>
+        </form>
+    </body>
+</html>
