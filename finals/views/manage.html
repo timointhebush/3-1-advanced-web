@@ -35,8 +35,8 @@
             {% endif %}
             <div class="song-artist">{{song.artist}}</div>
             <div class="song-title">{{song.title}}</div>
-            <button class="btn" id="edit">수정</button>
-            <button class="btn" id="remove">삭제</button>
+            <button onclick="edit(event)" class="btn" id="edit">수정</button>
+            <button onclick="remove(event)" class="btn" id="remove">삭제</button>
             <div class="song-content">{{song.content}}</div>
           </div>
         {% endfor %}
@@ -65,27 +65,30 @@
     }
     
     // 삭제와 수정 버튼 코드
-    document.getElementById('edit').addEventListener('click', async () => {
+    async function edit(e) {
       const artist = prompt('수정할 아티스트 이름을 입력하세요');
       const title = prompt('수정할 노래 제목을 입력하세요');
-      const song_id = document.getElementById('song-id').value;
-      if (!artist || !title) {
+      const content = prompt('수정할 노래 comment를 입력하세요');
+      const song_id = e.target.parentNode.childNodes[3].value
+      if (!artist || !title || !content) {
           return alert('수정할 이름과 글을 반드시 입력하셔야 합니다');
       }
       try {
-          await axios.patch(`/manage`, {song_id, artist, title});
+          await axios.patch(`/manage`, {song_id, artist, title, content});
           window.location = '/manage'
       } catch(err) {
           console.error(err);
       }
-    });
-    document.getElementById('remove').addEventListener('click', async () => {
+    };
+
+    async function remove(e) {
       try {
-          await axios.delete(`/manage/${document.getElementById('song-id').value}`);
+          const song_id = e.target.parentNode.childNodes[3].value
+          await axios.delete(`/manage/${song_id}`);
           window.location = '/manage'
       } catch(err) {
           console.log(err);
       }
-    });
+    }
   </script>
 {% endblock %}

@@ -39,6 +39,7 @@ router.patch('/manage', async (req, res, next) => {
       const result = await Playlist.update({
         artist: req.body.artist,
         title: req.body.title,
+        content: req.body.content,
       }, {
         where: { id: req.body.song_id },
       });
