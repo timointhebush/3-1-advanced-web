@@ -9,17 +9,18 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="logo"><img id='logo' src="./img/song_box_logo.png" width="50px">SONG BOX</h1>
-      <h2>여러분의 추천곡 리스트를 공유해보세요!</h2>
+      <img class='main_title' id='main_title_logo' src="./img/song_box_logo.png" width="50px">
+      <h1 class="main_title" id="main_title_txt">SONG BOX</h1>
+      <h2 class="main_title" id='sub_title_txt'>여러분의 추천곡 리스트를 공유해보세요!</h2>
       <div class="profile-wrap">
         <div class="profile">
-          {% if user and user.id %}
-            <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
+        {% if user and user.id %}
+          <div class="user-name">{{'안녕하세요! ' + user.nick + '님'}}</div>
           <input id="my-id" type="hidden" value="{{user.id}}">
             {% if title == "SONGBOX" %}
-              <a id="manage" href="/manage" class="btn">플레이리스트 관리하기</a>
+              <a id="playlist" href="/manage" class="btn">플레이리스트 관리하기</a>
             {% else %}
-              <a id="main" href="/" class="btn">플레이리스트</a>
+              <a id="playlist" href="/" class="btn">플레이리스트</a>
             {% endif %}
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
         {% else %}

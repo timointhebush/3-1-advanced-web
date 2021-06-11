@@ -3,23 +3,23 @@
 {% block content %}
     <div class="timeline">
       {% if user %}
-      <div class="twits">
+      <div class="songs">
         {% for song in playlist %}
-          <div class="twit">
-            <input type="hidden" value="{{song.User.id}}" class="twit-user-id">
-            <input type="hidden" value="{{song.id}}" class="twit-id">
-            <div class="twit-author">{{song.User.nick}}님의 추천곡</div>
+          <div class="song">
+            <input type="hidden" value="{{song.User.id}}" class="song-user-id">
+            <input type="hidden" value="{{song.id}}" class="song-id">
+            <div class="song-author">{{song.User.nick}}님의 추천곡</div><br>
             {% if song.img %}
-              <div class="twit-img"><img src="{{song.img}}" alt="섬네일"></div>
+              <div class="song-img"><img src="{{song.img}}" alt="섬네일" ></div>
             {% endif %}
             <div class="song-artist">{{song.artist}}</div>
             <div class="song-title">{{song.title}}</div>
-            <div class="song-content">{{song.content}}</div>
-            <button onclick="linkYoutube(event)" type="button">
+            <button class="song-youtube" onclick="linkYoutube(event)" type="button">
               <img src='./img/youtube_logo.png' height="40px">
               <input type="hidden" value="{{song.artist}}" id="hidden-artist">
               <input type="hidden" value="{{song.title}}" id="hidden-title">
             </button>
+            <div class="song-content">{{song.content}}</div>
           </div>
         {% endfor %}
       </div>
