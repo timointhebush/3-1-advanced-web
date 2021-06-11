@@ -9,6 +9,7 @@ router.use((req, res, next) => {
     next();
 })
 
+// 플레이리스트 관리 페이지
 router.get('/manage', isLoggedIn, async (req, res, next) => {
   try {
       console.log(req.user.id);
@@ -32,6 +33,7 @@ router.get('/manage', isLoggedIn, async (req, res, next) => {
     }
 });
 
+// 플레이리스트의 노래를 수정
 router.patch('/manage', async (req, res, next) => {
   try {
       const result = await Playlist.update({
@@ -58,15 +60,17 @@ router.delete('/manage/:song_id', async (req, res, next) => {
     }
 });
 
-
+// 회원가입 페이지.
 router.get('/join', isNotLoggedIn, (req, res) => {
     res.render('join', {title: '회원가입'});
 });
 
+// 로그인 페이지.
 router.get('/login', isNotLoggedIn, (req, res) => {
   res.render('login');
 });
 
+// 메인 화면. 모든 사용자들의 플레이리스트 출력.
 router.get('/', async (req, res, next) => {
   try {
     const playlist = await Playlist.findAll({

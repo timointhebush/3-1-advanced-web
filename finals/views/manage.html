@@ -1,6 +1,8 @@
+<!-- 특정 사용자의 플레이리스트를 관리하는 페이지.  -->
+<!-- 사용자가 플레이리스트의 노래를 추가,수정,삭제할 수 있다. -->
+<!-- 또한 노래의 앨범커버 이미지를 업로드 할 수 있다. -->
+<!-- 넌적스의 extends를 사용해 아래 파일을 레이아웃삼아 제작. -->
 {% extends 'layout.html' %}
-
-
 {% block content %}
     <div class="timeline">
       {% if user %}
@@ -43,6 +45,7 @@
 {% endblock %}
 
 {% block script %}
+  <!-- 앨범 커버 이미지를 업로드할 때, 미리보기를 가능하게 하는 코드 -->
   <script>
     if (document.getElementById('img')) {
       document.getElementById('img').addEventListener('change', function(e) {
@@ -61,6 +64,7 @@
       });
     }
     
+    // 삭제와 수정 버튼 코드
     document.getElementById('edit').addEventListener('click', async () => {
       const artist = prompt('수정할 아티스트 이름을 입력하세요');
       const title = prompt('수정할 노래 제목을 입력하세요');

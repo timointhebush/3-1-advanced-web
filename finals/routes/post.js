@@ -8,6 +8,8 @@ const { isLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
+// multer를 사용하여 앨범 커버 이미지를 업로드하게 해주는 코드.
+
 try {
   fs.readdirSync('uploads');
 } catch (error) {

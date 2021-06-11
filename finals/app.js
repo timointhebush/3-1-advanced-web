@@ -1,3 +1,4 @@
+// 각종 미들웨어 로드 및 사용 코드
 const express = require('express');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
@@ -30,7 +31,6 @@ sequelize.sync({force: false})
     .catch((err) => {
         console.error(err);
     })
-
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'uploads')));
@@ -46,15 +46,15 @@ app.use(session({
         secure: false,
     }
 }));
-
 app.use(passport.initialize());
-
 app.use(passport.session());
 
+// 라우터 할당.
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
 
+//에러 처리 코드.
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
     error.status = 404;

@@ -1,3 +1,5 @@
+// 시퀄라이저를 사용하기 위한 index.js
+
 const Sequelize = require('sequelize');
 const User = require('./user');
 const Playlist = require('./playlist');

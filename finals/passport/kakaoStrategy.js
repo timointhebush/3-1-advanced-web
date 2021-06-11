@@ -3,6 +3,8 @@ const KakaoStrategy = require('passport-kakao').Strategy;
 
 const User = require('../models/user');
 
+
+// 카카오전략 로그인 구현 코드.
 module.exports = () => {
   passport.use(new KakaoStrategy({
     clientID: process.env.KAKAO_ID,

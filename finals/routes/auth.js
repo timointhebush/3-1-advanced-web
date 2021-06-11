@@ -1,3 +1,4 @@
+// 로그인 기능 구성
 const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
@@ -6,6 +7,7 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+// local로 로그인하기 위한 회원가입.
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
   const { email, nick, password } = req.body;
   try {
@@ -26,6 +28,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
   }
 });
 
+// local전략으로 로그인할 때.
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (authError, user, info) => {
     if (authError) {
@@ -45,12 +48,14 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
   })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
 });
 
+// 로그아웃.
 router.get('/logout', isLoggedIn, (req, res) => {
   req.logout();
   req.session.destroy();
   res.redirect('/');
 });
 
+// kakao전략으로 로그인할 때.
 router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {

@@ -1,5 +1,7 @@
+<!-- 가장 메인 페이지. 모든 사용자들의 업로드 한 플레이리스트들을 볼 수 있다. -->
+<!-- 유튜브 아이콘을 눌러 유튜브에서 해당 노래를 바로 청취할 수 있다. -->
+<!-- 넌적스의 extends를 사용해 layout.html을 기반으로 제작. -->
 {% extends 'layout.html' %}
-
 {% block content %}
     <div class="timeline">
       {% if user %}
@@ -30,24 +32,9 @@
 {% endblock %}
 
 {% block script %}
+  <!-- 유튜브 버튼을 구성하는 코드 -->
   <script>
-    if (document.getElementById('img')) {
-      document.getElementById('img').addEventListener('change', function(e) {
-        const formData = new FormData();
-        console.log(this, this.files);
-        formData.append('img', this.files[0]);
-        axios.post('/post/img', formData)
-          .then((res) => {
-            document.getElementById('img-url').value = res.data.url;
-            document.getElementById('img-preview').src = res.data.url;
-            document.getElementById('img-preview').style.display = 'inline';
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      });
-    };
-
+    // 아티스트 명, 타이틀과 쿼리 스트링을 사용해 링크를 구성.
     function linkYoutube(e) {
       const song = e.target.parentNode;
       const artist = song.childNodes[3].value;
@@ -55,6 +42,5 @@
       const search_url = `https://www.youtube.com/results?search_query=${artist}+${title}`;
       window.location = search_url;
     };
-    
   </script>
 {% endblock %}

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 
+
+// 로컬 전략 로그인 구현 코드
 module.exports = () => {
     passport.use(new LocalStrategy({
         usernameField: 'email',

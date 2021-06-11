@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+//사용자 정보를 저장하는 테이블.
 module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
@@ -37,6 +38,7 @@ module.exports = class User extends Sequelize.Model {
     });
   }
 
+  // 하나의 사용자가 여러개의 플레이리스트를 가지고 있는 형태.
   static associate(db) {
     db.User.hasMany(db.Playlist);
   }
