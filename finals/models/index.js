@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const User = require('./user');
-const Post = require('./post');
+const Playlist = require('./playlist');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
@@ -12,12 +12,12 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = User;
-db.Post = Post;
+db.Playlist = Playlist;
 
 User.init(sequelize);
-Post.init(sequelize);
+Playlist.init(sequelize);
 
 User.associate(db);
-Post.associate(db);
+Playlist.associate(db);
 
 module.exports = db;

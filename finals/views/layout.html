@@ -10,6 +10,7 @@
   <body>
     <div class="container">
       <h1 class="logo"><img id='logo' src="./img/song_box_logo.png" width="50px">SONG BOX</h1>
+      <h2>여러분의 추천곡 리스트를 공유해보세요!</h2>
       <div class="profile-wrap">
         <div class="profile">
           {% if user and user.id %}
@@ -23,6 +24,7 @@
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
         {% else %}
           <a id="login" href="/login" class="btn">로그인</a>
+          <a id="join" href="/join" class="btn">회원가입</a>
         {% endif %}
         </div>
       </div>

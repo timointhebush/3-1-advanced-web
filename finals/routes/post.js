@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { Post } = require('../models');
+const { Playlist } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -37,12 +37,14 @@ const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
   try {
     console.log(req.user);
-    const post = await Post.create({
+    const song = await Playlist.create({
+      artist: req.body.artist,
+      title: req.body.title,
       content: req.body.content,
       img: req.body.url,
       UserId: req.user.id,
     });
-    res.redirect('/');
+    res.redirect('/manage');
   } catch (error) {
     console.error(error);
     next(error);

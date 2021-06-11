@@ -9,6 +9,7 @@
             <div class="input-group">
               <input type="artist" name="artist" placeholder="Artist"><br>
               <input type="title" name="title" placeholder="Title"><br>
+              <textarea id="twit" name="content" placeholder="노래에 대한 comment" maxlength="140"></textarea>
             </div>
             <div class="img-preview">
               <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
@@ -23,14 +24,17 @@
         </div>
       {% endif %}
       <div class="twits">
-        {% for twit in twits %}
+        {% for song in playlist %}
           <div class="twit">
-            <input type="hidden" value="{{twit.User.id}}" class="twit-user-id">
-            <input type="hidden" value="{{twit.id}}" class="twit-id">
-            <div class="twit-author">{{twit.User.nick}}</div>
-            <div class="twit-content">{{twit.content}}</div>
-            {% if twit.img %}
-              <div class="twit-img"><img src="{{twit.img}}" alt="섬네일"></div>
+            <input type="hidden" id='song-user-id' value="{{song.User.id}}" class="twit-user-id">
+            <input type="hidden" id='song-id' value="{{song.id}}" class="twit-id">
+            <div class="song-artist">{{song.artist}}</div>
+            <div class="song-title">{{song.title}}</div>
+            <div class="song-content">{{song.content}}</div>
+            <button id="edit">수정</button>
+            <button id="remove">삭제</button>
+            {% if song.img %}
+              <div class="twit-img"><img src="{{song.img}}" alt="섬네일"></div>
             {% endif %}
           </div>
         {% endfor %}
@@ -56,24 +60,28 @@
           });
       });
     }
-    document.querySelectorAll('.twit-follow').forEach(function(tag) {
-      tag.addEventListener('click', function() {
-        const myId = document.querySelector('#my-id');
-        if (myId) {
-          const userId = tag.parentNode.querySelector('.twit-user-id').value;
-          if (userId !== myId.value) {
-            if (confirm('팔로잉하시겠습니까?')) {
-              axios.post(`/user/${userId}/follow`)
-                .then(() => {
-                  location.reload();
-                })
-                .catch((err) => {
-                  console.error(err);
-                });
-            }
-          }
-        }
-      });
+    
+    document.getElementById('edit').addEventListener('click', async () => {
+      const artist = prompt('수정할 아티스트 이름을 입력하세요');
+      const title = prompt('수정할 노래 제목을 입력하세요');
+      const song_id = document.getElementById('song-id').value;
+      if (!artist || !title) {
+          return alert('수정할 이름과 글을 반드시 입력하셔야 합니다');
+      }
+      try {
+          await axios.patch(`/manage`, {song_id, artist, title});
+          window.location = '/manage'
+      } catch(err) {
+          console.error(err);
+      }
+    });
+    document.getElementById('remove').addEventListener('click', async () => {
+      try {
+          await axios.delete(`/manage/${document.getElementById('song-id').value}`);
+          window.location = '/manage'
+      } catch(err) {
+          console.log(err);
+      }
     });
   </script>
 {% endblock %}
