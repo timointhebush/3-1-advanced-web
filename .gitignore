@@ -2,5 +2,4 @@
 .env
 **/config
 **/node_modules
-**/public/img
 **/uploads
